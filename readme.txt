@@ -5,8 +5,8 @@ Author URI: http://www.gopiplus.com/work/2012/04/20/wordpress-plugin-wp-anything
 Plugin URI: http://www.gopiplus.com/work/2012/04/20/wordpress-plugin-wp-anything-slider/
 Tags:  wordpress, plugin, anything, slider
 Requires at least: 3.0
-Tested up to: 3.4.1
-Stable tag: 4.0
+Tested up to: 3.4.2
+Stable tag: 5.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 	
@@ -67,6 +67,10 @@ Q) How can I change the display style?
 
 == Upgrade Notice ==
 
+= 5.0 =
+
+Tested up to: 3.4.2
+
 = 4.0 =
 
 New demo link, www.gopiplus.com
@@ -85,6 +89,10 @@ Option to update the widget title
 First version.	
 
 == Changelog ==
+
+= 5.0 =
+
+Tested up to: 3.4.2
 
 = 4.0 =
 
