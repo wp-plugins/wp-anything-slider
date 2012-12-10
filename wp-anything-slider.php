@@ -5,7 +5,7 @@ Plugin Name: Wp anything slider
 Plugin URI: http://www.gopiplus.com/work/2012/04/20/wordpress-plugin-wp-anything-slider/
 Description: Wp anything slider plug-in let you to create the sliding slideshow gallery into your posts and pages. In the admin we have Tiny MCE HTML editor to add, update the content. using this HTML editor we can add HTML text and can upload the images and video files.
 Author: Gopi.R
-Version: 5.0
+Version: 6.0
 Author URI: http://www.gopiplus.com/work/2012/04/20/wordpress-plugin-wp-anything-slider/
 Donate link: http://www.gopiplus.com/work/2012/04/20/wordpress-plugin-wp-anything-slider/
 Tags: Wordpress, plugin, slider
@@ -54,8 +54,8 @@ function wpanything($setting)
 	?>
 	</div>
     <script type="text/javascript">
-    $(function() {
-	$('#WP-ANYTHING-<?php echo strtoupper($setting); ?>').cycle({
+    jQuery(function() {
+	jQuery('#WP-ANYTHING-<?php echo strtoupper($setting); ?>').cycle({
 		fx: '<?php echo @$wpanything_sdirection; ?>',
 		speed: <?php echo @$wpanything_sspeed; ?>,
 		timeout: <?php echo @$wpanything_stimeout; ?>
@@ -184,8 +184,8 @@ function wpanything_shortcode( $atts )
 
 	$wpcycle = $wpcycle . '</div>';
 	$wpcycle = $wpcycle . '<script type="text/javascript">';
-    $wpcycle = $wpcycle . '$(function() {';
-	$wpcycle = $wpcycle . "$('#WP-ANYTHING-".strtoupper($setting)."').cycle({fx: '".$wpanything_sdirection."',speed: " . $wpanything_sspeed . ",timeout: " . $wpanything_stimeout . "";
+    $wpcycle = $wpcycle . 'jQuery(function() {';
+	$wpcycle = $wpcycle . "jQuery('#WP-ANYTHING-".strtoupper($setting)."').cycle({fx: '".$wpanything_sdirection."',speed: " . $wpanything_sspeed . ",timeout: " . $wpanything_stimeout . "";
 	$wpcycle = $wpcycle . '});';
 	$wpcycle = $wpcycle . '});';
 	$wpcycle = $wpcycle . '</script>';
@@ -219,7 +219,7 @@ function wpanything_add_javascript_files()
 {
 	if (!is_admin())
 	{
-		wp_enqueue_script( 'jquery-1.3.2.min', get_option('siteurl').'/wp-content/plugins/wp-anything-slider/js/jquery-1.3.2.min.js');
+		wp_enqueue_script( 'jquery');
 		wp_enqueue_script( 'jquery.cycle.all.min', get_option('siteurl').'/wp-content/plugins/wp-anything-slider/js/jquery.cycle.all.min.js');
 		wp_enqueue_style( 'wp-anything-slider', get_option('siteurl').'/wp-content/plugins/wp-anything-slider/wp-anything-slider.css');
 	}	
@@ -227,7 +227,7 @@ function wpanything_add_javascript_files()
 
 function wpanything_deactivation() 
 {
-
+	// No action required.
 }
 
 add_shortcode( 'wp-anything-slider', 'wpanything_shortcode' );
