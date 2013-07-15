@@ -5,7 +5,7 @@ Plugin Name: Wp anything slider
 Plugin URI: http://www.gopiplus.com/work/2012/04/20/wordpress-plugin-wp-anything-slider/
 Description: Wp anything slider plug-in let you to create the sliding slideshow gallery into your posts and pages. In the admin we have Tiny MCE HTML editor to add, update the content. using this HTML editor we can add HTML text and can upload the images and video files.
 Author: Gopi.R
-Version: 6.0
+Version: 7.0
 Author URI: http://www.gopiplus.com/work/2012/04/20/wordpress-plugin-wp-anything-slider/
 Donate link: http://www.gopiplus.com/work/2012/04/20/wordpress-plugin-wp-anything-slider/
 Tags: Wordpress, plugin, slider
@@ -16,6 +16,11 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 global $wpdb, $wp_version;
 define("WP_ANYTHING_SETTINGS", $wpdb->prefix . "wpanything_settings");
 define("WP_ANYTHING_CONTENT", $wpdb->prefix . "wpanything_content");
+
+define("Wp_wpanything_UNIQUE_NAME", "wp-anything-slider");
+define("Wp_wpanything_TITLE", "Wp anything slider");
+define('Wp_wpanything_FAV', 'http://www.gopiplus.com/work/2012/04/20/wordpress-plugin-wp-anything-slider/');
+define('Wp_wpanything_LINK', 'Check official website for more information <a target="_blank" href="'.Wp_wpanything_FAV.'">click here</a>');
 
 function wpanything($setting) 
 {
@@ -140,7 +145,25 @@ function wpanything_widget($args)
 function wpanything_admin_options() 
 {
 	global $wpdb;
-	include_once("content-management.php");
+	$current_page = isset($_GET['ac']) ? $_GET['ac'] : '';
+	switch($current_page)
+	{
+		case 'add':
+			include('pages/content-add.php');
+			break;
+		case 'edit':
+			include('pages/content-edit.php');
+			break;
+		case 'editcycle':
+			include('pages/cycle-setting-edit.php');
+			break;
+		case 'showcycle':
+			include('pages/cycle-setting-show.php');
+			break;
+		default:
+			include('pages/content-show.php');
+			break;
+	}
 }
 
 function wpanything_shortcode( $atts ) 
@@ -210,8 +233,8 @@ function wpanything_add_to_menu()
 {
 	if (is_admin()) 
 	{
-		add_options_page('Wp Anything Slider', 'Wp Anything Slider', 'manage_options', __FILE__, 'wpanything_admin_options' );
-		add_options_page('Wp Anything Slider', '', 'manage_options', "wp-anything-slider/cycle-setting.php",'' );
+		add_options_page('Wp Anything Slider', 'Wp Anything Slider', 'manage_options', 'wp-anything-slider', 'wpanything_admin_options' );
+		//add_options_page('Wp Anything Slider', '', 'manage_options', "wp-anything-slider/cycle-setting.php",'' );
 	}
 }
 

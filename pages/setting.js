@@ -18,7 +18,7 @@
 
 function wpanything_setting_redirect()
 {
-	window.location = "options-general.php?page=wp-anything-slider/cycle-setting.php";
+	window.location = "options-general.php?page=wp-anything-slider&ac=showcycle";
 }
 
 function wpanything_help()
@@ -52,14 +52,14 @@ function wpanything_content_delete(id)
 {
 	if(confirm("Do you want to delete this record?"))
 	{
-		document.wpanything_content_display.action="options-general.php?page=wp-anything-slider/wp-anything-slider.php&AC=DEL&DID="+id;
-		document.wpanything_content_display.submit();
+		document.frm_wpanything_display.action="options-general.php?page=wp-anything-slider&ac=del&did="+id;
+		document.frm_wpanything_display.submit();
 	}
 }	
 
 function wpanything_content_redirect()
 {
-	window.location = "options-general.php?page=wp-anything-slider/wp-anything-slider.php";
+	window.location = "options-general.php?page=wp-anything-slider";
 }
 
 function wpanything_content_submit()
