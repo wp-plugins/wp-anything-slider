@@ -13,7 +13,7 @@ $result = $wpdb->get_var($sSql);
 
 if ($result != '1')
 {
-	?><div class="error fade"><p><strong>Oops, selected details doesn't exist.</strong></p></div><?php
+	?><div class="error fade"><p><strong><?php _e('Oops, selected details doesnt exist.', 'wp-anything-slider'); ?></strong></p></div><?php
 }
 else
 {
@@ -50,13 +50,13 @@ if (isset($_POST['wpanything_form_submit']) && $_POST['wpanything_form_submit'] 
 	$form['wpanything_ctitle'] = isset($_POST['content']) ? $_POST['content'] : '';
 	if ($form['wpanything_ctitle'] == '')
 	{
-		$wpanything_errors[] = __('Please enter the text/announcement.', Wp_wpanything_UNIQUE_NAME);
+		$wpanything_errors[] = __('Please enter the text/announcement.', 'wp-anything-slider');
 		$wpanything_error_found = TRUE;
 	}
 	$form['wpanything_csetting'] = isset($_POST['wpanything_csetting']) ? $_POST['wpanything_csetting'] : '';
 	if ($form['wpanything_csetting'] == '')
 	{
-		$wpanything_errors[] = __('Please select the setting name.', Wp_wpanything_UNIQUE_NAME);
+		$wpanything_errors[] = __('Please select the setting name.', 'wp-anything-slider');
 		$wpanything_error_found = TRUE;
 	}
 	//	No errors found, we can add this Group to the table
@@ -71,26 +71,26 @@ if (isset($_POST['wpanything_form_submit']) && $_POST['wpanything_form_submit'] 
 				array($form['wpanything_ctitle'], $form['wpanything_csetting'], $did)
 			);
 		$wpdb->query($sSql);
-		
-		$wpanything_success = 'Details was successfully updated.';
+		$wpanything_success = __('Details was successfully updated.', 'wp-anything-slider');
 	}
 }
 
 if ($wpanything_error_found == TRUE && isset($wpanything_errors[0]) == TRUE)
 {
-?>
-  <div class="error fade">
-    <p><strong><?php echo $wpanything_errors[0]; ?></strong></p>
-  </div>
-  <?php
+	?>
+	<div class="error fade">
+		<p><strong><?php echo $wpanything_errors[0]; ?></strong></p>
+	</div>
+	<?php
 }
 if ($wpanything_error_found == FALSE && strlen($wpanything_success) > 0)
 {
-?>
-  <div class="updated fade">
-    <p><strong><?php echo $wpanything_success; ?> <a href="<?php echo get_option('siteurl'); ?>/wp-admin/options-general.php?page=wp-anything-slider">Click here</a> to view the details</strong></p>
-  </div>
-  <?php
+	?>
+	<div class="updated fade">
+		<p><strong><?php echo $wpanything_success; ?> 
+		<a href="<?php echo WP_wpanything_ADMIN_URL; ?>"><?php _e('Click here to view the details', 'wp-anything-slider'); ?></a></strong></p>
+	</div>
+	<?php
 }
 
 add_filter('admin_head','ShowTinyMCE');
@@ -109,18 +109,18 @@ function ShowTinyMCE()
 	do_action('admin_print_styles');
 }
 ?>
-<script language="JavaScript" src="<?php echo get_option('siteurl'); ?>/wp-content/plugins/wp-anything-slider/pages/setting.js"></script>
+<script language="JavaScript" src="<?php echo WP_wpanything_PLUGIN_URL; ?>/pages/setting.js"></script>
 <div class="form-wrap">
 	<div id="icon-edit" class="icon32 icon32-posts-post"><br></div>
-	<h2><?php echo Wp_wpanything_TITLE; ?></h2>
+	<h2><?php _e('Wp anything slider', 'wp-anything-slider'); ?></h2>
 	<form name="wpanything_content_form" method="post" action="#" onsubmit="return wpanything_content_submit()"  >
-      <h3>Update details</h3>
+      <h3><?php _e('Update details', 'wp-anything-slider'); ?></h3>
 	  
-	  	<label for="tag-title">Text/Announcement</label>
+	  	<label for="tag-title"><?php _e('Text/Announcement', 'wp-anything-slider'); ?></label>
 		<?php wp_editor(stripslashes($form['wpanything_ctitle']), "content");?>
-		<p>Enter your slider content.</p>
+		<p><?php _e('Enter your slider content.', 'wp-anything-slider'); ?></p>
 		
-		<label for="tag-title">Setting</label>
+		<label for="tag-title"><?php _e('Setting', 'wp-anything-slider'); ?></label>
 		<select name="wpanything_csetting" id="wpanything_csetting">
 			<option value="">Select</option>
 			<?php
@@ -138,17 +138,20 @@ function ShowTinyMCE()
 			}
 			?>
 		</select>
-		<p>Enter your setting name.</p>
+		<p><?php _e('Enter your setting name.', 'wp-anything-slider'); ?></p>
 
       <input name="wpanything_cid" id="wpanything_cid" type="hidden" value="<?php echo $form['wpanything_cid']; ?>">
       <input type="hidden" name="wpanything_form_submit" value="yes"/>
       <p class="submit">
-        <input name="publish" lang="publish" class="button add-new-h2" value="Update Details" type="submit" />&nbsp;
-        <input name="publish" lang="publish" class="button add-new-h2" onclick="wpanything_content_redirect()" value="Cancel" type="button" />&nbsp;
-        <input name="Help" lang="publish" class="button add-new-h2" onclick="wpanything_help()" value="Help" type="button" />
+        <input name="publish" lang="publish" class="button add-new-h2" value="<?php _e('Update Details', 'wp-anything-slider'); ?>" type="submit" />&nbsp;
+        <input name="publish" lang="publish" class="button add-new-h2" onclick="wpanything_content_redirect()" value="<?php _e('Cancel', 'wp-anything-slider'); ?>" type="button" />&nbsp;
+        <input name="Help" lang="publish" class="button add-new-h2" onclick="wpanything_help()" value="<?php _e('Help', 'wp-anything-slider'); ?>" type="button" />
       </p>
 	  <?php wp_nonce_field('wpanything_form_edit'); ?>
     </form>
 </div>
-<p class="description"><?php echo Wp_wpanything_LINK; ?></p>
+<p class="description">
+	<?php _e('Check official website for more information', 'wp-anything-slider'); ?>
+	<a target="_blank" href="<?php echo Wp_wpanything_FAV; ?>"><?php _e('click here', 'wp-anything-slider'); ?></a>
+</p>
 </div>

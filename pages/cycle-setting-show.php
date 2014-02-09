@@ -19,7 +19,7 @@ if (isset($_POST['frm_wpanything_display']) && $_POST['frm_wpanything_display'] 
 	
 	if ($result != '1')
 	{
-		?><div class="error fade"><p><strong>Oops, selected details doesn't exist (1).</strong></p></div><?php
+		?><div class="error fade"><p><strong><?php _e('Oops, selected details doesnt exist.', 'wp-anything-slider'); ?></strong></p></div><?php
 	}
 	else
 	{
@@ -37,7 +37,7 @@ if (isset($_POST['frm_wpanything_display']) && $_POST['frm_wpanything_display'] 
 			
 			//	Set success message
 			$wpanything_success_msg = TRUE;
-			$wpanything_success = __('Selected record was successfully deleted ('.$did.').', wpanything_UNIQUE_NAME);
+			$wpanything_success = __('Selected record was successfully deleted ('.$did.').', 'wp-anything-slider');
 		}
 	}
 	
@@ -49,35 +49,36 @@ if (isset($_POST['frm_wpanything_display']) && $_POST['frm_wpanything_display'] 
 ?>
 <div class="wrap">
   <div id="icon-edit" class="icon32 icon32-posts-post"></div>
-    <h2><?php echo Wp_wpanything_TITLE; ?></h2>
-    <h3>Setting management<!--<a class="add-new-h2" href="<?php echo get_option('siteurl'); ?>/wp-admin/options-general.php?page=wp-anything-slider&amp;ac=addcycle">Add New</a>--></h3>
+    <h2><?php _e('Wp anything slider', 'wp-anything-slider'); ?></h2>
+    <h3><?php _e('Setting Management', 'wp-anything-slider'); ?>
+	<!--<a class="add-new-h2" href="<?php //echo WP_wpanything_ADMIN_URL; ?>&amp;ac=addcycle">Add New</a>--></h3>
 	<div class="tool-box">
 	<?php
 		$sSql = "SELECT * FROM `".WP_ANYTHING_SETTINGS."` order by wpanything_sid asc";
 		$myData = array();
 		$myData = $wpdb->get_results($sSql, ARRAY_A);
 		?>
-		<script language="JavaScript" src="<?php echo get_option('siteurl'); ?>/wp-content/plugins/wp-anything-slider/pages/setting.js"></script>
+		<script language="JavaScript" src="<?php echo WP_wpanything_PLUGIN_URL; ?>/pages/setting.js"></script>
 		<form name="frm_wpanything_display" method="post">
       <table width="100%" class="widefat" id="straymanage">
         <thead>
           <tr>
             <th class="check-column" scope="col" style="width:15px;"><input type="checkbox" name="wpanything_group_item[]" /></th>
-			<th scope="col">Setting name</th>
-			<th scope="col">Short code</th>
-			<th scope="col">Speed</th>
-            <th scope="col">Direction</th>
-			<th scope="col">Timeout</th>
+			<th scope="col"><?php _e('Setting name', 'wp-anything-slider'); ?></th>
+			<th scope="col"><?php _e('Short code', 'wp-anything-slider'); ?></th>
+			<th scope="col"><?php _e('Speed', 'wp-anything-slider'); ?></th>
+            <th scope="col"><?php _e('Direction', 'wp-anything-slider'); ?></th>
+			<th scope="col"><?php _e('Timeout', 'wp-anything-slider'); ?></th>
           </tr>
         </thead>
 		<tfoot>
           <tr>
             <th class="check-column" scope="col" style="height:15px;"><input type="checkbox" name="wpanything_group_item[]" /></th>
-			<th scope="col">Setting name</th>
-			<th scope="col">Short code</th>
-			<th scope="col">Speed</th>
-            <th scope="col">Direction</th>
-			<th scope="col">Timeout</th>
+			<th scope="col"><?php _e('Setting name', 'wp-anything-slider'); ?></th>
+			<th scope="col"><?php _e('Short code', 'wp-anything-slider'); ?></th>
+			<th scope="col"><?php _e('Speed', 'wp-anything-slider'); ?></th>
+            <th scope="col"><?php _e('Direction', 'wp-anything-slider'); ?></th>
+			<th scope="col"><?php _e('Timeout', 'wp-anything-slider'); ?></th>
           </tr>
         </tfoot>
 		<tbody>
@@ -92,7 +93,7 @@ if (isset($_POST['frm_wpanything_display']) && $_POST['frm_wpanything_display'] 
 						<td align="left"><input type="checkbox" value="<?php echo $data['wpanything_sid']; ?>" name="wpanything_group_item[]"></td>
 						<td><?php echo stripslashes($data['wpanything_sname']); ?>
 						<div class="row-actions">
-							<span class="edit"><a title="Edit" href="<?php echo get_option('siteurl'); ?>/wp-admin/options-general.php?page=wp-anything-slider&amp;ac=editcycle&amp;did=<?php echo $data['wpanything_sid']; ?>">Edit</a></span>
+							<span class="edit"><a title="Edit" href="<?php echo WP_wpanything_ADMIN_URL; ?>&amp;ac=editcycle&amp;did=<?php echo $data['wpanything_sid']; ?>"><?php _e('Edit', 'wp-anything-slider'); ?></a></span>
 							<!--<span class="trash"><a onClick="javascript:wpanything_content_delete('<?php //echo $data['wpanything_sid']; ?>')" href="javascript:void(0);">Delete</a></span> -->
 						</div>
 						</td>
@@ -107,7 +108,7 @@ if (isset($_POST['frm_wpanything_display']) && $_POST['frm_wpanything_display'] 
 			}
 			else
 			{
-				?><tr><td colspan="6" align="center">No records available.</td></tr><?php 
+				?><tr><td colspan="6" align="center"><?php _e('No records available.', 'wp-anything-slider'); ?></td></tr><?php 
 			}
 			?>
 		</tbody>
@@ -117,19 +118,22 @@ if (isset($_POST['frm_wpanything_display']) && $_POST['frm_wpanything_display'] 
       </form>	
 	  <div class="tablenav">
 	  <h2>
-	  <!--<a class="button add-new-h2" href="<?php echo get_option('siteurl'); ?>/wp-admin/options-general.php?page=wp-anything-slider&amp;ac=add">Add New</a>-->
-	  <a class="button add-new-h2" href="<?php echo get_option('siteurl'); ?>/wp-admin/options-general.php?page=wp-anything-slider&amp;ac=show">Text Management</a>
-	  <a class="button add-new-h2" href="<?php echo get_option('siteurl'); ?>/wp-admin/options-general.php?page=wp-anything-slider&amp;ac=showcycle">Setting Management</a>
-	  <a class="button add-new-h2" target="_blank" href="<?php echo Wp_wpanything_FAV; ?>">Help</a>
+	  <!--<a class="button add-new-h2" href="<?php //echo WP_wpanything_ADMIN_URL); ?>&amp;ac=add">Add New</a>-->
+	  <a class="button add-new-h2" href="<?php echo WP_wpanything_ADMIN_URL; ?>&amp;ac=show"><?php _e('Text Management', 'wp-anything-slider'); ?></a>
+	  <a class="button add-new-h2" href="<?php echo WP_wpanything_ADMIN_URL; ?>&amp;ac=showcycle"><?php _e('Setting', 'wp-anything-slider'); ?></a>
+	  <a class="button add-new-h2" target="_blank" href="<?php echo Wp_wpanything_FAV; ?>"><?php _e('Help', 'wp-anything-slider'); ?></a>
 	  </h2>
 	  </div>
 	  <div style="height:5px"></div>
-	<h3>Plugin configuration option</h3>
+	<h3><?php _e('Plugin configuration option', 'wp-anything-slider'); ?></h3>
 	<ol>
-		<li>Add the plugin in the posts or pages using short code.</li>
-		<li>Add directly in to the theme using PHP code.</li>
-		<li>Drag and drop the widget to your sidebar.</li>
+		<li><?php _e('Add the plugin in the posts or pages using short code.', 'wp-anything-slider'); ?></li>
+		<li><?php _e('Add directly in to the theme using PHP code.', 'wp-anything-slider'); ?></li>
+		<li><?php _e('Drag and drop the widget to your sidebar.', 'wp-anything-slider'); ?></li>
 	</ol>
-	<p class="description"><?php echo Wp_wpanything_LINK; ?></p>
+	<p class="description">
+		<?php _e('Check official website for more information', 'wp-anything-slider'); ?>
+		<a target="_blank" href="<?php echo Wp_wpanything_FAV; ?>"><?php _e('click here', 'wp-anything-slider'); ?></a>
+	</p>
 	</div>
 </div>

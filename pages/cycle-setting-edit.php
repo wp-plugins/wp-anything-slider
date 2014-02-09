@@ -13,7 +13,7 @@ $result = $wpdb->get_var($sSql);
 
 if ($result != '1')
 {
-	?><div class="error fade"><p><strong>Oops, selected details doesn't exist.</strong></p></div><?php
+	?><div class="error fade"><p><strong><?php _e('Oops, selected details doesnt exist.', 'wp-anything-slider'); ?></strong></p></div><?php
 }
 else
 {
@@ -68,35 +68,36 @@ if (isset($_POST['wpanything_form_submit']) && $_POST['wpanything_form_submit'] 
 			);
 		$wpdb->query($sSql);
 		
-		$wpanything_success = 'Details was successfully updated.';
+		$wpanything_success = __('Details was successfully updated.', 'wp-anything-slider');
 	}
 }
 
 if ($wpanything_error_found == TRUE && isset($wpanything_errors[0]) == TRUE)
 {
-?>
-  <div class="error fade">
-    <p><strong><?php echo $wpanything_errors[0]; ?></strong></p>
-  </div>
-  <?php
+	?>
+	<div class="error fade">
+		<p><strong><?php echo $wpanything_errors[0]; ?></strong></p>
+	</div>
+	<?php
 }
 if ($wpanything_error_found == FALSE && strlen($wpanything_success) > 0)
 {
-?>
-  <div class="updated fade">
-    <p><strong><?php echo $wpanything_success; ?> <a href="<?php echo get_option('siteurl'); ?>/wp-admin/options-general.php?page=wp-anything-slider&ac=showcycle">Click here</a> to view the details</strong></p>
-  </div>
-  <?php
+	?>
+	<div class="updated fade">
+		<p><strong><?php echo $wpanything_success; ?> 
+		<a href="<?php echo WP_wpanything_ADMIN_URL; ?>&ac=showcycle"><?php _e('Click here to view the details', 'wp-anything-slider'); ?></a></strong></p>
+	</div>
+	<?php
 }
 ?>
-<script language="JavaScript" src="<?php echo get_option('siteurl'); ?>/wp-content/plugins/wp-anything-slider/pages/setting.js"></script>
+<script language="JavaScript" src="<?php echo WP_wpanything_PLUGIN_URL; ?>/pages/setting.js"></script>
 <div class="form-wrap">
 	<div id="icon-edit" class="icon32 icon32-posts-post"><br></div>
-	<h2><?php echo Wp_wpanything_TITLE; ?></h2>
+	<h2><?php _e('Wp anything slider', 'wp-anything-slider'); ?></h2>
 	<form name="wpanything_setting_form" method="post" action="#" onsubmit="return wpanything_setting_submit()"  >
-      <h3>Update details</h3>
+      <h3><?php _e('Update details', 'wp-anything-slider'); ?></h3>
 	  
-	  <label for="tag-title">Setting name</label>
+	  <label for="tag-title"><?php _e('Setting name', 'wp-anything-slider'); ?></label>
 		<select name="wpanything_sname" id="wpanything_sname" disabled="disabled">
 			<option value="">Select</option>
             <?php
@@ -114,35 +115,38 @@ if ($wpanything_error_found == FALSE && strlen($wpanything_success) > 0)
 			}
 			?>
           </select>
-		<p>Select a setting name.</p>
+		<p><?php _e('Select a setting name.', 'wp-anything-slider'); ?></p>
 				
-		<label for="tag-title">Speed</label>
+		<label for="tag-title"><?php _e('Speed', 'wp-anything-slider'); ?></label>
 		<input name="wpanything_sspeed" type="text" id="wpanything_sspeed" value="<?php echo $form['wpanything_sspeed']; ?>" maxlength="5" />
-		<p>Enter your speed. Ex: 700</p>
+		<p><?php _e('Enter your speed.', 'wp-anything-slider'); ?> Ex: 700</p>
 		
-		<label for="tag-title">Timeout</label>
+		<label for="tag-title"><?php _e('Timeout', 'wp-anything-slider'); ?></label>
 		<input name="wpanything_stimeout" type="text" id="wpanything_stimeout" value="<?php echo $form['wpanything_stimeout']; ?>" maxlength="5" />
-		<p>Enter your timeout. Ex: 5000</p>
+		<p><?php _e('Enter your timeout.', 'wp-anything-slider'); ?> Ex: 5000</p>
 		
-		<label for="tag-title">Direction</label>
+		<label for="tag-title"><?php _e('Direction', 'wp-anything-slider'); ?></label>
 		<select name="wpanything_sdirection" id="wpanything_sdirection">
             <option value='scrollLeft' <?php if($form['wpanything_sdirection']== 'scrollLeft') { echo 'selected' ; } ?>>scrollLeft</option>
             <option value='scrollRight' <?php if($form['wpanything_sdirection'] == 'scrollRight') { echo 'selected' ; } ?>>scrollRight</option>
             <option value='scrollUp' <?php if($form['wpanything_sdirection'] == 'scrollUp') { echo 'selected' ; } ?>>scrollUp</option>
             <option value='scrollDown' <?php if($form['wpanything_sdirection'] == 'scrollDown') { echo 'selected' ; } ?>>scrollDown</option>
           </select>
-		<p>Selct cycle direction.</p>
+		<p><?php _e('Selct cycle direction.', 'wp-anything-slider'); ?></p>
 		
 	  
       <input name="wpanything_sid" id="wpanything_sid" type="hidden" value="<?php echo $form['wpanything_sid']; ?>">
       <input type="hidden" name="wpanything_form_submit" value="yes"/>
       <p class="submit">
-        <input name="publish" lang="publish" class="button add-new-h2" value="Update Details" type="submit" />&nbsp;
-        <input name="publish" lang="publish" class="button add-new-h2" onclick="wpanything_setting_redirect()" value="Cancel" type="button" />&nbsp;
-        <input name="Help" lang="publish" class="button add-new-h2" onclick="wpanything_help()" value="Help" type="button" />
+        <input name="publish" lang="publish" class="button add-new-h2" value="<?php _e('Update Details', 'wp-anything-slider'); ?>" type="submit" />&nbsp;
+        <input name="publish" lang="publish" class="button add-new-h2" onclick="wpanything_setting_redirect()" value="<?php _e('Cancel', 'wp-anything-slider'); ?>" type="button" />&nbsp;
+        <input name="Help" lang="publish" class="button add-new-h2" onclick="wpanything_help()" value="<?php _e('Help', 'wp-anything-slider'); ?>" type="button" />
       </p>
 	  <?php wp_nonce_field('wpanything_form_edit'); ?>
     </form>
 </div>
-<p class="description"><?php echo Wp_wpanything_LINK; ?></p>
+<p class="description">
+	<?php _e('Check official website for more information', 'wp-anything-slider'); ?>
+	<a target="_blank" href="<?php echo Wp_wpanything_FAV; ?>"><?php _e('click here', 'wp-anything-slider'); ?></a>
+</p>
 </div>

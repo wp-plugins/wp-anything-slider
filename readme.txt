@@ -5,8 +5,8 @@ Author URI: http://www.gopiplus.com/work/2012/04/20/wordpress-plugin-wp-anything
 Plugin URI: http://www.gopiplus.com/work/2012/04/20/wordpress-plugin-wp-anything-slider/
 Tags:  wordpress, plugin, anything, slider
 Requires at least: 3.4
-Tested up to: 3.6
-Stable tag: 7.0
+Tested up to: 3.8
+Stable tag: 7.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 	
@@ -61,11 +61,17 @@ Q) How can I change the display style?
 
 == Screenshots ==
 
-1. Admin setting. http://www.gopiplus.com/work/2012/04/20/wordpress-plugin-wp-anything-slider/
+1. Front Screen. http://www.gopiplus.com/work/2012/04/20/wordpress-plugin-wp-anything-slider/
 
-1. Live demo. http://www.gopiplus.com/work/2012/04/20/wordpress-plugin-wp-anything-slider/
+1. Admin Screen. http://www.gopiplus.com/work/2012/04/20/wordpress-plugin-wp-anything-slider/
 
 == Upgrade Notice ==
+
+= 7.1 =
+
+1. Tested up to 3.8
+2. Now this plugin supports localization (or internationalization). i.e. option to translate into other languages. 
+Plugin *.po file (wp-anything-slider.po) available in the languages folder.
 
 = 7.0 =
 
@@ -102,6 +108,12 @@ First version.
 
 == Changelog ==
 
+= 7.1 =
+
+1. Tested up to 3.8
+2. Now this plugin supports localization (or internationalization). i.e. option to translate into other languages. 
+Plugin *.po file (wp-anything-slider.po) available in the languages folder.
+
 = 7.0 =
 
 Tested up to 3.6
@@ -133,5 +145,4 @@ Option to update the widget title
 
 = 1.0 =  
 
-First version.		
-
+First version.

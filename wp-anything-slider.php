@@ -1,11 +1,10 @@
 <?php
-
 /*
 Plugin Name: Wp anything slider
 Plugin URI: http://www.gopiplus.com/work/2012/04/20/wordpress-plugin-wp-anything-slider/
 Description: Wp anything slider plug-in let you to create the sliding slideshow gallery into your posts and pages. In the admin we have Tiny MCE HTML editor to add, update the content. using this HTML editor we can add HTML text and can upload the images and video files.
 Author: Gopi.R
-Version: 7.0
+Version: 7.1
 Author URI: http://www.gopiplus.com/work/2012/04/20/wordpress-plugin-wp-anything-slider/
 Donate link: http://www.gopiplus.com/work/2012/04/20/wordpress-plugin-wp-anything-slider/
 Tags: Wordpress, plugin, slider
@@ -16,11 +15,19 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 global $wpdb, $wp_version;
 define("WP_ANYTHING_SETTINGS", $wpdb->prefix . "wpanything_settings");
 define("WP_ANYTHING_CONTENT", $wpdb->prefix . "wpanything_content");
-
-define("Wp_wpanything_UNIQUE_NAME", "wp-anything-slider");
-define("Wp_wpanything_TITLE", "Wp anything slider");
 define('Wp_wpanything_FAV', 'http://www.gopiplus.com/work/2012/04/20/wordpress-plugin-wp-anything-slider/');
-define('Wp_wpanything_LINK', 'Check official website for more information <a target="_blank" href="'.Wp_wpanything_FAV.'">click here</a>');
+
+if ( ! defined( 'WP_wpanything_BASENAME' ) )
+	define( 'WP_wpanything_BASENAME', plugin_basename( __FILE__ ) );
+	
+if ( ! defined( 'WP_wpanything_PLUGIN_NAME' ) )
+	define( 'WP_wpanything_PLUGIN_NAME', trim( dirname( WP_wpanything_BASENAME ), '/' ) );
+	
+if ( ! defined( 'WP_wpanything_PLUGIN_URL' ) )
+	define( 'WP_wpanything_PLUGIN_URL', WP_PLUGIN_URL . '/' . WP_wpanything_PLUGIN_NAME );
+	
+if ( ! defined( 'WP_wpanything_ADMIN_URL' ) )
+	define( 'WP_wpanything_ADMIN_URL', get_option('siteurl') . '/wp-admin/options-general.php?page=wp-anything-slider' );
 
 function wpanything($setting) 
 {
@@ -104,7 +111,7 @@ function wpanything_install()
 			  `wpanything_cstartdate` datetime NOT NULL default '2012-01-01 00:00:00',
 			  `wpanything_cenddate` datetime NOT NULL default '2020-12-30 00:00:00',
 			  `wpanything_csetting` VARCHAR( 12 ) NOT NULL,
-			  PRIMARY KEY  (`wpanything_cid`) )
+			  PRIMARY KEY  (`wpanything_cid`) ) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
 			");
 		$iIns = "INSERT INTO `". WP_ANYTHING_CONTENT . "` (`wpanything_ctitle`, `wpanything_csetting`)"; 
 		
@@ -121,13 +128,13 @@ function wpanything_install()
 function wpanything_control() 
 {
 	$wpanything_title = get_option('wpanything_title');
-	if (@$_POST['wpanything_submit']) 
+	if (isset($_POST['wpanything_submit'])) 
 	{
 		$wpanything_title = stripslashes($_POST['wpanything_title']);
 		update_option('wpanything_title', $wpanything_title );
 	}
 	
-	echo '<p>Title:<br><input  style="width: 200px;" type="text" value="';
+	echo '<p>'.__('Title:', 'wp-anything-slider').'<br><input  style="width: 200px;" type="text" value="';
 	echo $wpanything_title . '" name="wpanything_title" id="vsrru_title" /></p>';
 	echo '<input type="hidden" id="wpanything_submit" name="wpanything_submit" value="1" />';
 }
@@ -220,12 +227,14 @@ function wpanything_init()
 {
 	if(function_exists('wp_register_sidebar_widget')) 
 	{
-		wp_register_sidebar_widget('Wp Anything Slider', 'Wp Anything Slider', 'wpanything_widget');
+		wp_register_sidebar_widget( __('Wp Anything Slider', 'wp-anything-slider'), 
+				__('Wp Anything Slider', 'wp-anything-slider'), 'wpanything_widget');
 	}
 	
 	if(function_exists('wp_register_widget_control')) 
 	{
-		wp_register_widget_control('Wp Anything Slider', array('Wp Anything Slider', 'widgets'), 'wpanything_control');
+		wp_register_widget_control( __('Wp Anything Slider', 'wp-anything-slider'), 
+				array( __('Wp Anything Slider', 'wp-anything-slider'), 'widgets'), 'wpanything_control');
 	} 
 }
 
@@ -233,8 +242,8 @@ function wpanything_add_to_menu()
 {
 	if (is_admin()) 
 	{
-		add_options_page('Wp Anything Slider', 'Wp Anything Slider', 'manage_options', 'wp-anything-slider', 'wpanything_admin_options' );
-		//add_options_page('Wp Anything Slider', '', 'manage_options', "wp-anything-slider/cycle-setting.php",'' );
+		add_options_page( __('Wp Anything Slider', 'wp-anything-slider'), 
+				__('Wp Anything Slider', 'wp-anything-slider'), 'manage_options', 'wp-anything-slider', 'wpanything_admin_options' );
 	}
 }
 
@@ -243,8 +252,8 @@ function wpanything_add_javascript_files()
 	if (!is_admin())
 	{
 		wp_enqueue_script( 'jquery');
-		wp_enqueue_script( 'jquery.cycle.all.min', get_option('siteurl').'/wp-content/plugins/wp-anything-slider/js/jquery.cycle.all.min.js');
-		wp_enqueue_style( 'wp-anything-slider', get_option('siteurl').'/wp-content/plugins/wp-anything-slider/wp-anything-slider.css');
+		wp_enqueue_script( 'jquery.cycle.all.min', WP_wpanything_PLUGIN_URL.'/js/jquery.cycle.all.min.js');
+		wp_enqueue_style( 'wp-anything-slider', WP_wpanything_PLUGIN_URL.'/wp-anything-slider.css');
 	}	
 }
 
@@ -253,6 +262,12 @@ function wpanything_deactivation()
 	// No action required.
 }
 
+function wpanything_textdomain() 
+{
+	  load_plugin_textdomain( 'wp-anything-slider', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
+}
+
+add_action('plugins_loaded', 'wpanything_textdomain');
 add_shortcode( 'wp-anything-slider', 'wpanything_shortcode' );
 add_action('admin_menu', 'wpanything_add_to_menu');
 add_action('wp_enqueue_scripts', 'wpanything_add_javascript_files');
