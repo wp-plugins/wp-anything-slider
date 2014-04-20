@@ -3,14 +3,16 @@
 Plugin Name: Wp anything slider
 Plugin URI: http://www.gopiplus.com/work/2012/04/20/wordpress-plugin-wp-anything-slider/
 Description: Wp anything slider plug-in let you to create the sliding slideshow gallery into your posts and pages. In the admin we have Tiny MCE HTML editor to add, update the content. using this HTML editor we can add HTML text and can upload the images and video files.
-Author: Gopi.R
-Version: 7.1
+Author: Gopi Ramasamy
+Version: 7.2
 Author URI: http://www.gopiplus.com/work/2012/04/20/wordpress-plugin-wp-anything-slider/
 Donate link: http://www.gopiplus.com/work/2012/04/20/wordpress-plugin-wp-anything-slider/
 Tags: Wordpress, plugin, slider
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 */
+
+if(preg_match('#' . basename(__FILE__) . '#', $_SERVER['PHP_SELF'])) { die('You are not allowed to call this page directly.'); }
 
 global $wpdb, $wp_version;
 define("WP_ANYTHING_SETTINGS", $wpdb->prefix . "wpanything_settings");
