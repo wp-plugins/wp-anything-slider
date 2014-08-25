@@ -5,8 +5,8 @@ Author URI: http://www.gopiplus.com/work/2012/04/20/wordpress-plugin-wp-anything
 Plugin URI: http://www.gopiplus.com/work/2012/04/20/wordpress-plugin-wp-anything-slider/
 Tags:  wordpress, plugin, anything, slider
 Requires at least: 3.4
-Tested up to: 3.9
-Stable tag: 7.2
+Tested up to: 4.0
+Stable tag: 7.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 	
@@ -36,12 +36,12 @@ Plugin configuration
 
 Add directly in the theme:
 
-Paste this PHP code <?php wpanything('etting1'); ?> in your theme where you want the announcement to appear.
+Paste this PHP code `<?php wpanything('etting1'); ?>` in your theme where you want the announcement to appear.
 
 Short code for posts and pages:
 
 Copy and paste the below given short code into pages or posts to display the news
-Short code : [wp-anything-slider setting="SETTING1"]	
+Short code : `[wp-anything-slider setting="SETTING1"]`
 
 Plugin configuration
 
@@ -66,6 +66,10 @@ Q) How can I change the display style?
 1. Admin Screen. http://www.gopiplus.com/work/2012/04/20/wordpress-plugin-wp-anything-slider/
 
 == Upgrade Notice ==
+
+= 7.3 =
+
+1. Tested up to 4.0
 
 = 7.2 =
 
@@ -112,6 +116,10 @@ Option to update the widget title
 First version.	
 
 == Changelog ==
+
+= 7.3 =
+
+1. Tested up to 4.0
 
 = 7.2 =
 
